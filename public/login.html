@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>查询</title>
+		<script>
+			function show(){
+				// 获取异步请求
+				let xhr = new XMLHttpRequest();
+				// console.log(xhr)
+				xhr.onreadystatechange = function(){
+					console.log("33333333")
+					if(xhr.readyState==4 && xhr.status==200){
+						let r = xhr.responseText;
+						// console.log(r);
+						r=JSON.parse(r);
+						let str=`<table border="1">
+						<tr>
+							<th>id</th>
+							<th>inch</th>
+							<th>ram</th>
+							<th>rom</th>
+							<th>cpu</th>
+							<th>title</th>
+							<th>price</th>
+							<th>detail</th>
+							<th>unm</th>
+							<th>login</th>
+							<th>mp</th>
+							<th>sales</th>
+							<th>操作</th>
+						</tr>`
+						if(r!=0){
+							for(var i=0;i<r.length;i++){
+								str+=`
+								<tr>
+									<td>${r[i].id}</td>
+									<td>${r[i].inch}</td>
+									<td>${r[i].ram}</td>
+									<td>${r[i].rom}</td>
+									<td>${r[i].cpu}</td>
+									<td>${r[i].title}</td>
+									<td>${r[i].price}</td>
+									<td>${r[i].detail}</td>
+									<td>${r[i].unm}</td>
+									<td>${r[i].login}</td>
+									<td><a href="xianqing.html"><img src="${r[i].mp}"></a></td>
+									<td>${r[i].sales}</td>
+									<td>
+										<a href="javascript:del(${r[i].id})">删除</a>
+										<a href="login_upd.html?id=${r[i].id}">修改</a>
+									</td>
+								</tr>
+								`
+							}
+							str+=`</table>`;
+							d1.innerHTML=str;
+						}
+					}
+				}
+				xhr.open("get","http://127.0.0.1:8080/pro/v1/login",true)
+				// console.log("1111111111")
+				xhr.send()
+				// console.log("2222222222")
+				
+			}
+			function del(_id){
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4 && xhr.status==200){
+						var r = xhr.responseText;
+						if(r==1){
+							alert("删除成功");
+							show();
+						}else{
+							alert("删除失败")
+						}
+					}
+				}
+				xhr.open("delete","http://127.0.0.1:8080/pro/v1/del_home/"+_id,true)
+				xhr.send();
+			}
+		</script>
+		<style>
+			img{
+				width:100px;
+				height:100px;
+			}
+		</style>
+	</head>
+	<body onload="show()">
+		<div id="d1"></div>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+.breadcrumb-item+.breadcrumb-item::before{
+	content: ">";
+}
+.my_overflow{overflow: hidden;}
+.my_bg_img{
+	transition: 1s;
+}
+.my_bg_img:hover{transform: scale(1.1);}
+.my_img{
+	width: 6.5rem;
+}
+.my_img:hover{
+	transform: translate(2px,2px);
+	border:1px solid #999;
+}
+.text-text{
+	    color: #007cff;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			function sel(){
+				// let _id = id.value;
+				// console.log(_id)
+				let obj = new URLSearchParams(location.search);
+				let _id = obj.get("id");
+				let xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4 && xhr.status==200){
+						let r = xhr.responseText;
+						// console.log("333333333")
+						// console.log(r);
+						if(r!=0){
+							r=JSON.parse(r);
+							inch.value=r[0].inch;
+							ram.value=r[0].ram;
+							rom.value=r[0].rom;
+							cpu.value=r[0].cpu;
+							title.value=r[0].title;
+							price.value=r[0].price;
+							detail.value=r[0].detail;
+							unm.value=r[0].unm;
+							logo.value=r[0].logo;
+							mp.value=r[0].mp;
+							sales.value=r[0].sales;
+						}else{
+							alert("没有此人");
+						}
+					}
+				}
+				xhr.open('get','http://127.0.0.1:8080/pro/v1/select_home?id='+_id,true);
+				xhr.send();
+			}
+			
+			function upd(){
+				let obj = new URLSearchParams(location.search);
+				let _id = obj.get("id");
+				console.log(_id)
+				let _inch = inch.value;
+				console.log(_inch);
+				let _ram = ram.value;
+				let _rom = rom.value;
+				let _cpu = cpu.value;
+				let _title = title.value;
+				let _price = price.value;
+				let _detail = detail.value;
+				let _unm = unm.value;
+				let _logo = logo.value;
+				let _mp = mp.value;
+				let _sales = sales.value;
+				let xhr = new XMLHttpRequest();
+				console.log("11111111")
+				xhr.onreadystatechange = function(){
+					// console.log("222222222222")
+					if(xhr.readyState==4 && xhr.status==200){
+						let r = xhr.responseText;
+						console.log(r);
+						if(r!=0){
+							alert("修改成功")
+							location.href="login.html"
+						}else{
+							alert("修改失败")
+						}
+					}
+				}
+				xhr.open("post","http://127.0.0.1:8080/pro/v1/upd_home",true);
+				let formdate=`id=${_id}&inch=${_inch}&ram=${_ram}&rom=${_rom}&cpu=${_cpu}&title=${_title}&price=${_price}&detail=${_detail}&unm=${_unm}&logo=${_logo}&mp=${_mp}&sales=${_sales}`;
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+				xhr.send(formdate);
+			}
+		</script>
+	</head>
+	<body onload="sel()">
+		<form action="" enctype="application/x-www-form-urlencoded"></form>
+		<h1>查询+修改</h1>
+		<!-- id:<input type="text" id="id"><br> -->
+		inch:<input type="text" id="inch"><br>
+		ram:<input type="text" id="ram"><br>
+		rom:<input type="text" id="rom"><br>
+		cpu:<input type="text" id="cpu"><br>
+		title:<input type="text" id="title"><br>
+		price:<input type="text" id="price"><br>
+		detail:<input type="text" id="detail"><br>
+		unm:<input type="text" id="unm"><br>
+		login:<input type="text" id="logo"><br>
+		mp:<input type="text" id="mp"><br>
+		sales: <input type="text" id="sales"><br>
+		<!-- <button onclick="sel()">显示</button> -->
+		<button onclick="upd()"> 修改</button>
+	</body>
+</html>
