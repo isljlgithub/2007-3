@@ -18,12 +18,12 @@
 				</div>
 				<div id="bg-2-2">
 					<div>
-						<input type="text"  onblur="isuname()" onfocus="clearTipText('name_msg')" id="uname" placeholder="用户名"/>
+						<input onblur="check_name()" onfocus="show_unme()" type="text" id="uname" placeholder="用户名">
 						<span id="name_msg"></span>
 					</div>
 					<div>
 						<div>
-							<input type="password" id="upwd"onblur="isupwd()"  onfocus="clearTipText('upwd_msg')" placeholder="密码"/>
+							<input onblur="check_upwd()" onfocus="show_upwd()" type="text" id="upwd" placeholder="密码">
 							<span id="upwd_msg"></span>
 						</div>
 						<div>
@@ -31,14 +31,14 @@
 						</div>
 					</div>
 					<div>
-						<input type="password" onblur="iscpwd()" onfocus="clearTipText('cpwd_msg')" id="cpwd" placeholder="确认密码"/>
+						<input onblur="check_cpwd()"  onfocus="show_cpwd()" type="text" id="cpwd" placeholder="重复密码">
 						<span id="cpwd_msg"></span>
 					</div>
 					<div>
-						<input type="text" onblur="isphone()" onfocus="clearTipText('phone_msg')" id="phone" placeholder="手机号"/>
+						<input onblur="check_phone()" onfocus="show_phone()" type="text" id="phone"placeholder="手机号">
 						<span id="phone_msg"></span>
 					</div>
-					<button id="btn" onclick="onSubmit()">立即注册</button>
+					<button id="btn" onclick="insrt()">立即注册</button>
 				</div>
 			</div>
 		</div>

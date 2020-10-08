@@ -1,0 +1,1 @@
+window.VIPSHAREVERSION="share1.3.1v";
